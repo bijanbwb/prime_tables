@@ -3,7 +3,18 @@ defmodule PrimesTables do
   Documentation for `PrimesTables`.
   """
 
-  @spec run(input :: non_neg_integer()) :: String.t() | {:error, String.t()}
+  #
+  # Types
+  #
+
+  @type input() :: non_neg_integer()
+  @type output() :: String.t() | {:error, String.t()}
+
+  #
+  # Run
+  #
+
+  @spec run(input :: input()) :: output()
   def run(input) when is_integer(input) and input > 1 do
     "output"
   end
