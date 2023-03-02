@@ -21,13 +21,10 @@ defmodule PrimesTables do
 
   @spec run(number :: input()) :: output()
   def run(number) when is_integer(number) and number > 1 do
-    numbers = Enum.to_list(2..number)
-
-    prime_numbers = find_primes(numbers)
-
-    multiplication_table_string = generate_multiplication_table(prime_numbers)
-
-    print_to_stdio(multiplication_table_string)
+    Enum.to_list(2..number)
+    |> find_primes()
+    |> generate_multiplication_table()
+    |> print_to_stdio()
   end
 
   def run(number) do
