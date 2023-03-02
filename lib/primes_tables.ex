@@ -65,9 +65,28 @@ defmodule PrimesTables do
 
   """
   @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
+  def generate_multiplication_table([]), do: ""
+
   def generate_multiplication_table(prime_numbers) do
-    Enum.reduce(prime_numbers, "", fn prime_number, acc ->
-      acc <> "| #{prime_number} |\n"
+    prime_numbers_with_offset = [1 | prime_numbers]
+
+    # [{1, 1}, {2, 2}, {3, 3}, {5, 5}]
+    zip_list = Enum.zip(prime_numbers_with_offset, prime_numbers_with_offset)
+
+    zip_list
+    |> Enum.reduce("", fn {x, _y}, acc ->
+      row_string = acc <> "#{x}"
+
+      s =
+        Enum.reduce(zip_list, row_string, fn {_x2, y2}, a ->
+          if y2 > 1 do
+            a <> "#{x * y2}"
+          else
+            a
+          end
+        end)
+
+      s <> "\n"
     end)
   end
 end

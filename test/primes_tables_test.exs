@@ -52,7 +52,14 @@ defmodule PrimesTablesTest do
 
       # When
       result = PrimesTables.generate_multiplication_table(prime_numbers)
-      lines_in_output = result |> String.split("\n") |> Enum.count()
+
+      lines_in_output =
+        result
+        |> String.trim_trailing()
+        |> String.split("\n")
+        |> Enum.count()
+
+      IO.puts(result)
 
       # Then
       expected_lines_in_output = Enum.count(prime_numbers) + 1
