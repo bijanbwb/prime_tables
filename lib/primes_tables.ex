@@ -23,9 +23,9 @@ defmodule PrimesTables do
   def run(number) when is_integer(number) and number > 1 do
     numbers = Enum.to_list(2..number)
 
-    _prime_numbers = find_primes(numbers)
+    prime_numbers = find_primes(numbers)
 
-    "output"
+    generate_multiplication_table(prime_numbers)
   end
 
   def run(number) do
@@ -43,9 +43,14 @@ defmodule PrimesTables do
   end
 
   @spec is_prime(number :: non_neg_integer()) :: boolean()
-  def is_prime(number) when number > 3 do
+  defp is_prime(number) when number > 3 do
     rem(number, 2) != 0 and rem(number, 3) != 0
   end
 
-  def is_prime(_number), do: false
+  defp is_prime(_number), do: false
+
+  @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
+  def generate_multiplication_table(_prime_numbers) do
+    ""
+  end
 end

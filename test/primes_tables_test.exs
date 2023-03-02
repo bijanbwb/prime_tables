@@ -32,4 +32,17 @@ defmodule PrimesTablesTest do
       assert result == [2, 3, 5, 7]
     end
   end
+
+  describe "generate_multiplication_table/1" do
+    test "generates an empty string for no primes" do
+      # Given
+      prime_numbers = []
+
+      # When
+      result = PrimesTables.generate_multiplication_table(prime_numbers)
+
+      # Then
+      assert "" == result
+    end
+  end
 end
