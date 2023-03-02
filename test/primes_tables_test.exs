@@ -11,7 +11,14 @@ defmodule PrimesTablesTest do
 
   describe "find_primes/1" do
     test "finds no primes for an empty list of numbers" do
-      assert [] == PrimesTables.find_primes([])
+      # Given
+      numbers = []
+
+      # When
+      result = PrimesTables.find_primes(numbers)
+
+      # Then
+      assert Enum.empty?(result)
     end
 
     test "finds primes from 2 to 10" do

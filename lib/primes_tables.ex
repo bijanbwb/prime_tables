@@ -36,7 +36,16 @@ defmodule PrimesTables do
   def find_primes([]), do: []
 
   def find_primes(numbers) do
-    # TODO: Find prime numbers.
-    numbers
+    # TODO: Replace temporary naive prime check.
+    primes = Enum.filter(numbers, &is_prime/1)
+
+    [2, 3 | primes]
   end
+
+  @spec is_prime(number :: non_neg_integer()) :: boolean()
+  def is_prime(number) when number > 3 do
+    rem(number, 2) != 0 and rem(number, 3) != 0
+  end
+
+  def is_prime(_number), do: false
 end
