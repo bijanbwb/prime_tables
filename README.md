@@ -30,4 +30,14 @@ $ mix run -e "PrimesTables.run(5)"
 
 ## 📝 Notes
 
-- ...
+- Overall happy with the way the problem was divided up and tested:
+    - validate input
+    - find primes
+    - generate table
+    - print output
+- Realized at the end that the challenge was to find N primes and not all the
+  primes from 2 to N. I can try to push a quick fix for this given a little
+  more time.
+- I had to look up the sieve algorithm [on Wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes).
+    - Given a little more time I'd probably use [`benchee`](https://github.com/bencheeorg/benchee) to try a more performant approach.
+- It would be fun to build a UI instead of printing to stdout.
