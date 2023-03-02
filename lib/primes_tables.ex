@@ -21,6 +21,10 @@ defmodule PrimesTables do
 
   @spec run(number :: input()) :: output()
   def run(number) when is_integer(number) and number > 1 do
+    numbers = Enum.to_list(2..number)
+
+    _prime_numbers = find_primes(numbers)
+
     "output"
   end
 
@@ -29,5 +33,10 @@ defmodule PrimesTables do
   end
 
   @spec find_primes(list(non_neg_integer())) :: list(non_neg_integer())
-  def find_primes([] = _numbers), do: []
+  def find_primes([]), do: []
+
+  def find_primes(numbers) do
+    # TODO: Find prime numbers.
+    numbers
+  end
 end
