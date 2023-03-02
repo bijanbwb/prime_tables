@@ -1,21 +1,14 @@
-# PrimesTables
+# ✖️ PrimesTables
 
-**TODO: Add description**
+This is a coding challenge to gather a list of prime numbers and generate
+a multiplication table for those numbers as output.
 
-## Installation
+## 🏃‍♀️ Running the Project
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `primes_tables` to your list of dependencies in `mix.exs`:
+1. Install [Elixir](https://elixir-lang.org/install.html).
+2. Run `mix` to compile the project.
+3. Run `mix test` to run all tests.
 
-```elixir
-def deps do
-  [
-    {:primes_tables, "~> 0.1.0"}
-  ]
-end
-```
+## 📝 Notes
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/primes_tables>.
-
+- ...
