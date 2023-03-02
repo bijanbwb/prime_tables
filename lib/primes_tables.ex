@@ -72,12 +72,25 @@ defmodule PrimesTables do
 
     prime_numbers_with_offset
     |> Enum.reduce("", fn x, acc ->
-      row_string =
-        Enum.reduce(prime_numbers_with_offset, acc <> "#{x}", fn y, a ->
-          if y > 1, do: a <> "#{x * y}", else: a
+      row_starting_string = acc <> "| #{format_number_for_table(x)} |"
+
+      completed_row_string =
+        Enum.reduce(prime_numbers_with_offset, row_starting_string, fn y, a ->
+          if y > 1, do: a <> " #{format_number_for_table(x * y)} |", else: a
         end)
 
-      row_string <> "\n"
+      completed_row_string <> "\n"
     end)
   end
+
+  @spec format_number_for_table(number :: non_neg_integer()) :: String.t()
+  defp format_number_for_table(number) when number == 1, do: String.pad_leading("x", 2)
+
+  defp format_number_for_table(number) when number in 1..9 do
+    number
+    |> to_string()
+    |> String.pad_leading(2)
+  end
+
+  defp format_number_for_table(number), do: to_string(number)
 end

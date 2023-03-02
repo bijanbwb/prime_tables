@@ -59,14 +59,11 @@ defmodule PrimesTablesTest do
         |> String.split("\n")
         |> Enum.count()
 
-      IO.puts(result)
-
       # Then
       expected_lines_in_output = Enum.count(prime_numbers) + 1
       assert lines_in_output == expected_lines_in_output
     end
 
-    @tag :skip
     test "generates a multiplication table string for the first 3 prime numbers" do
       # Given
       prime_numbers = [2, 3, 5]
