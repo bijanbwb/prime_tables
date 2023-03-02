@@ -42,7 +42,40 @@ defmodule PrimesTablesTest do
       result = PrimesTables.generate_multiplication_table(prime_numbers)
 
       # Then
-      assert "" == result
+      assert is_binary(result)
+      assert result == ""
+    end
+
+    test "generates the correct number of rows in the multiplication table" do
+      # Given
+      prime_numbers = [2, 3, 5]
+
+      # When
+      result = PrimesTables.generate_multiplication_table(prime_numbers)
+      lines_in_output = result |> String.split("\n") |> Enum.count()
+
+      # Then
+      expected_lines_in_output = Enum.count(prime_numbers) + 1
+      assert lines_in_output == expected_lines_in_output
+    end
+
+    @tag :skip
+    test "generates a multiplication table string for the first 3 prime numbers" do
+      # Given
+      prime_numbers = [2, 3, 5]
+
+      # When
+      result = PrimesTables.generate_multiplication_table(prime_numbers)
+
+      # Then
+      expected_output = """
+      |  x |  2 |  3 |  5 |
+      |  2 |  4 |  6 | 10 |
+      |  3 |  6 |  9 | 15 |
+      |  5 | 10 | 15 | 25 |
+      """
+
+      assert result == expected_output
     end
   end
 end

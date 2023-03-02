@@ -65,7 +65,9 @@ defmodule PrimesTables do
 
   """
   @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
-  def generate_multiplication_table(_prime_numbers) do
-    ""
+  def generate_multiplication_table(prime_numbers) do
+    Enum.reduce(prime_numbers, "", fn prime_number, acc ->
+      acc <> "| #{prime_number} |\n"
+    end)
   end
 end
