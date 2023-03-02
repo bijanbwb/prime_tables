@@ -70,23 +70,14 @@ defmodule PrimesTables do
   def generate_multiplication_table(prime_numbers) do
     prime_numbers_with_offset = [1 | prime_numbers]
 
-    # [{1, 1}, {2, 2}, {3, 3}, {5, 5}]
-    zip_list = Enum.zip(prime_numbers_with_offset, prime_numbers_with_offset)
-
-    zip_list
-    |> Enum.reduce("", fn {x, _y}, acc ->
-      row_string = acc <> "#{x}"
-
-      s =
-        Enum.reduce(zip_list, row_string, fn {_x2, y2}, a ->
-          if y2 > 1 do
-            a <> "#{x * y2}"
-          else
-            a
-          end
+    prime_numbers_with_offset
+    |> Enum.reduce("", fn x, acc ->
+      row_string =
+        Enum.reduce(prime_numbers_with_offset, acc <> "#{x}", fn y, a ->
+          if y > 1, do: a <> "#{x * y}", else: a
         end)
 
-      s <> "\n"
+      row_string <> "\n"
     end)
   end
 end
