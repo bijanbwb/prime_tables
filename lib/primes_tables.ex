@@ -49,6 +49,21 @@ defmodule PrimesTables do
 
   defp is_prime(_number), do: false
 
+  @doc """
+  Produces a multiplication table for a set of prime numbers.
+
+  ## Example
+
+    - First three primes are [2, 3, 5]
+
+  ## Expected Output
+
+  |  x |  2 |  3 |  5 |
+  |  2 |  4 |  6 | 10 |
+  |  3 |  6 |  9 | 15 |
+  |  5 | 10 | 15 | 25 |
+
+  """
   @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
   def generate_multiplication_table(_prime_numbers) do
     ""
