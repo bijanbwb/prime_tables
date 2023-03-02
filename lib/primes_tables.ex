@@ -3,16 +3,12 @@ defmodule PrimesTables do
   Documentation for `PrimesTables`.
   """
 
-  @doc """
-  Hello world.
+  @spec run(input :: non_neg_integer()) :: String.t() | {:error, String.t()}
+  def run(input) when is_integer(input) and input > 1 do
+    "output"
+  end
 
-  ## Examples
-
-      iex> PrimesTables.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def run(input) do
+    {:error, "The input value #{input} should be a whole number greater than 1."}
   end
 end
