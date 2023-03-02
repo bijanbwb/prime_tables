@@ -1,6 +1,11 @@
 defmodule PrimesTables do
   @moduledoc """
-  Documentation for `PrimesTables`.
+  This application is intended to gather a list of prime numbers from `2` to
+  an input value `number`.
+
+  Then, we use those prime numbers to generate a string output with
+  multiplication tables for those numbers.
+
   """
 
   #
@@ -14,12 +19,15 @@ defmodule PrimesTables do
   # Run
   #
 
-  @spec run(input :: input()) :: output()
-  def run(input) when is_integer(input) and input > 1 do
+  @spec run(number :: input()) :: output()
+  def run(number) when is_integer(number) and number > 1 do
     "output"
   end
 
-  def run(input) do
-    {:error, "The input value #{input} should be a whole number greater than 1."}
+  def run(number) do
+    {:error, "The input value #{number} should be a whole number greater than 1."}
   end
+
+  @spec find_primes(list(non_neg_integer())) :: list(non_neg_integer())
+  def find_primes([] = _numbers), do: []
 end
