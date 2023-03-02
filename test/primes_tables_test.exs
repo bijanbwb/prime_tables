@@ -2,10 +2,37 @@ defmodule PrimesTablesTest do
   use ExUnit.Case
   doctest PrimesTables
 
+  import ExUnit.CaptureIO
+
   describe "run/1" do
     test "provides errors for invalid input values" do
       assert {:error, _error_message} = PrimesTables.run(0)
       assert {:error, _error_message} = PrimesTables.run(1.5)
+    end
+
+    test "prints a multiplication table to stdout for given prime numbers" do
+      # Given
+      input = 5
+
+      # When
+
+      actual_output =
+        capture_io(fn ->
+          :ok = PrimesTables.run(input)
+        end)
+        |> String.trim()
+
+      # Then
+      expected_output =
+        """
+        |  x |  2 |  3 |  5 |
+        |  2 |  4 |  6 | 10 |
+        |  3 |  6 |  9 | 15 |
+        |  5 | 10 | 15 | 25 |
+        """
+        |> String.trim()
+
+      assert actual_output == expected_output
     end
   end
 

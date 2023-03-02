@@ -13,7 +13,7 @@ defmodule PrimesTables do
   #
 
   @type input() :: non_neg_integer()
-  @type output() :: String.t() | {:error, String.t()}
+  @type output() :: :ok | {:error, String.t()}
 
   #
   # Run
@@ -25,7 +25,9 @@ defmodule PrimesTables do
 
     prime_numbers = find_primes(numbers)
 
-    generate_multiplication_table(prime_numbers)
+    multiplication_table_string = generate_multiplication_table(prime_numbers)
+
+    print_to_stdio(multiplication_table_string)
   end
 
   def run(number) do
@@ -39,23 +41,20 @@ defmodule PrimesTables do
     [number | find_primes(tail -- Enum.map(1..length(tail), fn n -> number * n end))]
   end
 
-  defp is_prime(_number), do: false
-
-  @doc """
+  @doc ~s"""
   Produces a multiplication table for a set of prime numbers.
 
   ## Example
 
-    - First three primes are [2, 3, 5]
-
-  ## Expected Output
-
-  |  x |  2 |  3 |  5 |
-  |  2 |  4 |  6 | 10 |
-  |  3 |  6 |  9 | 15 |
-  |  5 | 10 | 15 | 25 |
-
+      iex> PrimesTables.generate_multiplication_table([2, 3, 5])
+      \"\"\"
+      |  x |  2 |  3 |  5 |
+      |  2 |  4 |  6 | 10 |
+      |  3 |  6 |  9 | 15 |
+      |  5 | 10 | 15 | 25 |
+      \"\"\"
   """
+
   @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
   def generate_multiplication_table([]), do: ""
 
@@ -85,4 +84,8 @@ defmodule PrimesTables do
   end
 
   defp format_number_for_table(number), do: to_string(number)
+
+  def print_to_stdio(output) do
+    IO.puts(:stdio, output)
+  end
 end
