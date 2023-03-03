@@ -1,7 +1,7 @@
 defmodule PrimesTables do
   @moduledoc """
-  This application is intended to gather a list of prime numbers from `2` to
-  an input value `number`.
+  This application is intended to gather a list of N prime numbers where N is
+  an input called `number_of_primes_to_find`.
 
   Then, we use those prime numbers to generate a string output with
   multiplication tables for those numbers.
@@ -16,19 +16,37 @@ defmodule PrimesTables do
   @type output() :: :ok | {:error, String.t()}
 
   #
+  # Validation
+  #
+
+  defguardp is_valid_input(number) when is_integer(number) and number > 1
+
+  #
   # Run
   #
 
-  @spec run(number :: input()) :: output()
-  def run(number) when is_integer(number) and number > 1 do
-    Enum.to_list(2..number)
+  @spec run(number_of_primes_to_find :: input()) :: output()
+  def run(number_of_primes_to_find) when is_valid_input(number_of_primes_to_find) do
+    upper_bound = calculate_upper_bound(number_of_primes_to_find)
+
+    Enum.to_list(2..upper_bound)
     |> find_primes()
+    |> take_n_prime_numbers(number_of_primes_to_find)
     |> generate_multiplication_table()
     |> print_to_stdio()
   end
 
-  def run(number) do
-    {:error, "The input value #{number} should be a whole number greater than 1."}
+  def run(number_of_primes_to_find) do
+    {:error,
+     "The input value #{number_of_primes_to_find} should be a whole number greater than 1."}
+  end
+
+  @spec calculate_upper_bound(number :: non_neg_integer()) :: non_neg_integer()
+  defp calculate_upper_bound(number) do
+    # https://en.wikipedia.org/wiki/Prime_number_theorem#Approximations_for_the_nth_prime_number
+    # n log(n) + n log(log(n))
+    number * floor(:math.log(number)) +
+      number * floor(:math.log(number) + :math.log(:math.log(number)))
   end
 
   @spec find_primes(list(non_neg_integer())) :: list(non_neg_integer())
@@ -36,6 +54,14 @@ defmodule PrimesTables do
 
   def find_primes([number | tail]) do
     [number | find_primes(tail -- Enum.map(1..length(tail), fn n -> number * n end))]
+  end
+
+  @spec take_n_prime_numbers(list(non_neg_integer()), non_neg_integer()) ::
+          list(non_neg_integer())
+  def take_n_prime_numbers([], _number_of_primes_to_find), do: []
+
+  def take_n_prime_numbers(prime_numbers, number_of_primes_to_find) do
+    Enum.take(prime_numbers, number_of_primes_to_find)
   end
 
   @doc ~s"""
