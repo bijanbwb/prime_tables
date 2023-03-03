@@ -30,17 +30,17 @@ $ mix run -e "PrimesTables.run(3)"
 
 ## 📝 Notes
 
-- Overall happy with the way the problem was divided up and tested:
+- Structure of the Solution
     - validate input
+    - calculate an upper bound
     - find primes
+    - take n primes
     - generate table
     - print output
-- Potential future work:
-    - The table generation could probably be split:
-        - use a different data structure for the table (instead of a list) with map or try the [Nx library](https://hexdocs.pm/nx/Nx.html)
-        - produce the string output from the data structure
-  - Build a nice UI with Phoenix instead of printing to stdout
-  - Benchmark finding primes with [`benchee`](https://github.com/bencheeorg/benchee)
+- Potential Future Work
+    - Use a different data structure for the table (instead of list -> string) with a [Map](https://hexdocs.pm/elixir/1.12/Map.html) or the [Nx library](https://hexdocs.pm/nx/Nx.html), and then use it to produce the string output
+    - Build a nice web UI with Phoenix to visualize the algorithm instead of printing to stdout
+    - Benchmark finding primes with [`benchee`](https://github.com/bencheeorg/benchee)
 
 ## 📖 Reference
 
