@@ -87,6 +87,63 @@ defmodule PrimesTablesTest do
     end
   end
 
+  describe "generate_fibonacci_sequence/1" do
+    test "generates sequence of fibonacci numbers from 0 to 0" do
+      # Given
+      number_to_generate = 0
+
+      # When
+      result = PrimesTables.generate_n_fibonacci_numbers(number_to_generate)
+
+      # Then
+      assert result == []
+    end
+
+    test "generates sequence of fibonacci numbers from 0 to 1" do
+      # Given
+      number_to_generate = 1
+
+      # When
+      result = PrimesTables.generate_n_fibonacci_numbers(number_to_generate)
+
+      # Then
+      assert result == [0]
+    end
+
+    test "generates sequence of fibonacci numbers from 0 to 2" do
+      # Given
+      number_to_generate = 2
+
+      # When
+      result = PrimesTables.generate_n_fibonacci_numbers(number_to_generate)
+
+      # Then
+      assert result == [0, 1]
+    end
+
+    test "generates sequence of fibonacci numbers from 0 to 5" do
+      # Given
+      number_to_generate = 5
+
+      # When
+      result = PrimesTables.generate_n_fibonacci_numbers(number_to_generate)
+
+      # Then
+      assert result == [0, 1, 1, 2, 3]
+    end
+
+    test "generates sequence of fibonacci numbers from 0 to 22" do
+      # Given
+      number_to_generate = 10
+
+      # When
+      result = PrimesTables.generate_n_fibonacci_numbers(number_to_generate)
+
+      # Then
+      assert result == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    end
+  end
+
   describe "take_n_prime_numbers/2" do
     test "returns the first 3 prime numbers" do
       # Given

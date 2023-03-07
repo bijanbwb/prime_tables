@@ -12,7 +12,7 @@ defmodule PrimesTables do
   # Types
   #
 
-  @type input() :: non_neg_integer()
+  @type input() :: pos_integer()
   @type output() :: :ok | {:error, String.t()}
 
   #
@@ -41,7 +41,7 @@ defmodule PrimesTables do
      "The input value #{number_of_primes_to_find} should be a whole number greater than 1."}
   end
 
-  @spec calculate_upper_bound(number :: non_neg_integer()) :: non_neg_integer()
+  @spec calculate_upper_bound(number :: pos_integer()) :: pos_integer()
   defp calculate_upper_bound(number) do
     # https://en.wikipedia.org/wiki/Prime_number_theorem#Approximations_for_the_nth_prime_number
     # n log(n) + n log(log(n))
@@ -49,15 +49,41 @@ defmodule PrimesTables do
       number * floor(:math.log(number) + :math.log(:math.log(number)))
   end
 
-  @spec find_primes(list(non_neg_integer())) :: list(non_neg_integer())
+  @spec find_primes(list(pos_integer())) :: list(pos_integer())
   def find_primes([]), do: []
 
   def find_primes([number | tail]) do
     [number | find_primes(tail -- Enum.map(1..length(tail), fn n -> number * n end))]
   end
 
-  @spec take_n_prime_numbers(list(non_neg_integer()), non_neg_integer()) ::
+  @doc """
+  Generate a sequence of of the first n fibonacci numbers.
+
+  ## Examples
+
+      iex> PrimesTables.generate_n_fibonacci_numbers(5)
+      [0, 1, 1, 2, 3]
+  """
+  @spec generate_n_fibonacci_numbers(number_to_generate :: non_neg_integer()) ::
           list(non_neg_integer())
+  def generate_n_fibonacci_numbers(0), do: []
+  def generate_n_fibonacci_numbers(1), do: [0]
+  def generate_n_fibonacci_numbers(2), do: [0, 1]
+
+  def generate_n_fibonacci_numbers(number_to_generate) do
+    Enum.map(0..(number_to_generate - 1), &fibonacci_number/1)
+  end
+
+  @spec fibonacci_number(n :: non_neg_integer()) :: non_neg_integer()
+  defp fibonacci_number(0), do: 0
+  defp fibonacci_number(1), do: 1
+
+  defp fibonacci_number(n) do
+    fibonacci_number(n - 1) + fibonacci_number(n - 2)
+  end
+
+  @spec take_n_prime_numbers(list(pos_integer()), pos_integer()) ::
+          list(pos_integer())
   def take_n_prime_numbers([], _number_of_primes_to_find), do: []
 
   def take_n_prime_numbers(prime_numbers, number_of_primes_to_find) do
@@ -78,7 +104,7 @@ defmodule PrimesTables do
       \"\"\"
   """
 
-  @spec generate_multiplication_table(prime_numbers :: list(non_neg_integer())) :: String.t()
+  @spec generate_multiplication_table(prime_numbers :: list(pos_integer())) :: String.t()
   def generate_multiplication_table([]), do: ""
 
   def generate_multiplication_table(prime_numbers) do
@@ -97,7 +123,7 @@ defmodule PrimesTables do
     end)
   end
 
-  @spec format_number_for_table(number :: non_neg_integer()) :: String.t()
+  @spec format_number_for_table(number :: pos_integer()) :: String.t()
   defp format_number_for_table(number) when number == 1, do: String.pad_leading("x", 2)
 
   defp format_number_for_table(number) when number in 1..9 do
